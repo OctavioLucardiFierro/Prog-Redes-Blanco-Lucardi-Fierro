@@ -1,0 +1,36 @@
+import java.net.*;
+import java.io.*;
+
+
+public class SERVIDOR {
+    public static void main(String[] args) throws IOException{
+       DataInputStream Din;
+       DataOutputStream Dout;
+
+        //Establece El servidor en el puerto 4999
+        ServerSocket SERVERSOCKET = null;
+        try{
+            SERVERSOCKET = new ServerSocket(4999);
+        } catch (IOException e) {
+            System.err.println("No puedo abrir el puerto 4999.");
+            System.exit(1);
+        }
+        //El servidor declara que usara este socket para transferir los datos
+        Socket clienteSOCKET = null;
+        try {
+            clienteSOCKET = SERVERSOCKET.accept();
+
+           Din = new DataInputStream(clienteSOCKET.getInputStream());
+           Dout = new DataOutputStream(clienteSOCKET.getOutputStream());
+
+        } catch (IOException e){
+            System.err.println("No se puede aceptar la peticion");
+            System.exit(1);
+        }
+        //Escritores y lectores de flujos de datos
+        PrintWriter EscritorSalida = new PrintWriter(clienteSOCKET.getOutputStream(), true);
+        BufferedReader LectorEntrada = new BufferedReader(new InputStreamReader(clienteSOCKET.getInputStream()));
+
+        String LineaDeEntrada, LineaDeSalida;
+    }
+}

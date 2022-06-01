@@ -1,0 +1,27 @@
+import java.net.*;
+import java.io.*;
+
+
+public class SERVIDOR {
+    public static void main(String[] args) throws IOException{
+       //Establece El servidor en el puerto 4999
+        ServerSocket ss = new ServerSocket(4999);
+        //Acepta al cliente
+        Socket s = ss.accept();
+        System.out.println("Se conecto un cliente");
+
+        //Recibe el mensaje del cliente
+        InputStreamReader in = new InputStreamReader(s.getInputStream());
+        BufferedReader bf = new BufferedReader(in);
+
+        String str = bf.readLine();
+        System.out.println("cliente: " + str);
+
+
+        //Envia un mensaje fijo al Cliente
+        PrintWriter pr = new PrintWriter(s.getOutputStream());
+        pr.println("General Kenobi");
+        pr.flush ();
+
+    }
+}
