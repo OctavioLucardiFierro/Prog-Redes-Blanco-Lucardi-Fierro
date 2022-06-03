@@ -1,0 +1,113 @@
+import java.net.*;
+import java.io.*;
+import java.util.Scanner;
+public class Cliente {
+    //Establezco las variables
+    private Socket clientesocket;
+    private DataInputStream bufferDeEntrada = null;
+    private DataOutputStream bufferDeSalida = null;
+    Scanner teclado = new Scanner(System.in);
+    final String COMANDO_TERMINACION = "Saquenme_de_LATAM()";
+
+    //Se conecta al servidor
+    public void levantarConexion(String ip, int puerto) {
+        try {
+            clientesocket = new Socket(ip, puerto);
+            mostrarTexto("Conectado a :" + clientesocket.getInetAddress().getHostName());
+        } catch (Exception e) {
+            mostrarTexto("Excepción al levantar conexión: " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    public static void mostrarTexto(String s) {
+        System.out.println(s);
+    }
+
+    public void abrirFlujos() {
+        try {
+            bufferDeEntrada = new DataInputStream(clientesocket.getInputStream());
+            bufferDeSalida = new DataOutputStream(clientesocket.getOutputStream());
+            bufferDeSalida.flush();
+        } catch (IOException e) {
+            mostrarTexto("Error en la apertura de flujos");
+        }
+    }
+
+    public void enviar(String s) {
+        try {
+            bufferDeSalida.writeUTF(s);
+            bufferDeSalida.flush();
+        } catch (IOException e) {
+            mostrarTexto("IOException on enviar");
+        }
+    }
+
+
+    public void ejecutarConexion(String ip, int puerto) {
+        Thread hilo = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    levantarConexion(ip, puerto);
+                    abrirFlujos();
+                    recibirDatos();
+                } finally {
+                    cerrarConexion();
+                }
+            }
+        });
+        hilo.start();
+    }
+
+    public void recibirDatos() {
+        String st = "";
+        try {
+            do {
+                st = (String) bufferDeEntrada.readUTF();
+                mostrarTexto("\nServidor: " + st);
+                //System.out.print("\nTu: ");
+            } while (!st.equals(COMANDO_TERMINACION));
+        } catch (IOException e) {}
+    }
+
+    public void escribirDatos() {
+        String entrada = "";
+        while (true) {
+            System.out.print("Tu: ");
+            entrada = teclado.nextLine();
+            if(entrada.length() > 0)
+                enviar(entrada);
+        }
+    }
+
+    //Instrucciones para conectarse al puerto
+    public static void main(String[] argumentos) {
+        Cliente cliente = new Cliente();
+        Scanner escaner = new Scanner(System.in);
+        mostrarTexto("Ingresa la IP: [localhost por defecto/ 127.0.0.1] ");
+        String ip = escaner.nextLine();
+        //Configuro a que ip se conecta
+        if (ip.length() <= 0) ip = "localhost";
+
+        //  Configurar  el puerto
+        mostrarTexto("Puerto: [4999 por defecto] ");
+        String puerto = escaner.nextLine();
+        if (puerto.length() <= 0) puerto = "4999";
+        cliente.ejecutarConexion(ip, Integer.parseInt(puerto));
+        cliente.escribirDatos();
+    }
+    public void cerrarConexion() {
+        try {
+            bufferDeEntrada.close();
+            bufferDeSalida.close();
+            clientesocket.close();
+            mostrarTexto("Conexión terminada");
+        } catch (IOException e) {
+            mostrarTexto("IOException on cerrarConexion()");
+        }finally{
+            System.exit(0);
+        }
+    }
+
+}
