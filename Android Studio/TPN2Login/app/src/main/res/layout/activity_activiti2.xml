@@ -10,10 +10,11 @@
         android:id="@+id/button2"
         android:layout_width="253dp"
         android:layout_height="121dp"
+        android:layout_marginBottom="148dp"
         android:text="Volver al Futuro"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="341dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
