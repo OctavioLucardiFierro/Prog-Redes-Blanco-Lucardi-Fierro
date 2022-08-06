@@ -11,6 +11,7 @@
         android:layout_width="253dp"
         android:layout_height="121dp"
         android:layout_marginBottom="148dp"
+        android:onClick="holasoygerman"
         android:text="Volver al Futuro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
