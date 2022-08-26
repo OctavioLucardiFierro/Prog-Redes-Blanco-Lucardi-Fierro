@@ -22,12 +22,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent tercero = new Intent(this, Buscar.class);
         Intent segundo = new Intent(this, ACTIVITI2.class);
+
         TextView usuario = (TextView) findViewById(R.id.usuario);
         EditText email = (EditText) findViewById(R.id.editTextTextEmailAddress);
         TextView contraseñacartel = (TextView) findViewById(R.id.contraseñacartel);
         EditText Contraseña = (EditText) findViewById(R.id.editTextTextPassword);
         Button Login = (Button) findViewById(R.id.button);
+        Button Buscar = (Button) findViewById(R.id.buscar);
         TextView Advertencia = (TextView) findViewById(R.id.textView3);
 
         Login.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Buscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(tercero);
+            }
+        });
 
 
 

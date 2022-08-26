@@ -5,7 +5,4 @@
     {
         die("Fallo de conexion");
     }
-    else
-    {
-        echo "conexion exitosa";
-    }
+   
