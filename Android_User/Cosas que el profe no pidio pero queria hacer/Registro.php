@@ -29,7 +29,7 @@
                                     <button type="submit" name="register" value="register">Registrar</button>
                                 </form>
                                         <?php
-                                        include("insert.php");
+                                        include("../insert.php");
                                         ?>
                         </section>
                     </main>
