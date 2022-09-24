@@ -15,10 +15,10 @@
             }
             echo json_encode($array);
         }
-        else
+       /* else
         {
             echo "no se encontro nada";
-        }
+        }*/
         $result->close();
         $mysql->close();
     }

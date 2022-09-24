@@ -10,7 +10,7 @@ include ("db.php");
                     $created_at       = date('m-d-Y h:i:s a', time());
 
                     //"INSERT INTO persona(Nombre,Email, DNI, FechaDeNacimiento, Edad, num_celular, Apellido, Estado,Contraseña) VALUES ('$Nombre','$Email','$DNI','$FechadeNacimiento','$Edad','$Telefono','$Apellido','Cliente','$Contraseña')";
-                    $consulta = "INSERT INTO `user`(`ID`, `Usuario`, `Mail`, `Contraseña`, `created_at`, `updated_at`) VALUES (NULL,'$Usuario','$Mail','$Contraseña','$created_at','$updated_at')";
+                    $consulta = "INSERT INTO `user`(`ID`, `Usuario`, `Mail`, `Contraseña`, `created_at`, `updated_at`) VALUES (NULL,'$Usuario','$Mail','$Contraseña',NOW(),NOW())";
                     
                     $resultado = mysqli_query($mysql,$consulta);
     
