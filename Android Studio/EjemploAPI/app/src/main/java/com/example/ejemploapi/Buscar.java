@@ -3,14 +3,14 @@ package com.example.ejemploapi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,8 +33,13 @@ public class Buscar extends AppCompatActivity {
 
         Intent primero01 = new Intent(this, MainActivity.class);
 
-        TextView cartelBuscar  = (TextView) findViewById(R.id.cartelbuscar);
-        EditText BuscarID = (EditText) findViewById(R.id.editTextTextPersonName);
+
+        EditText MostrarNombre = (EditText) findViewById(R.id.MostrarNombre);
+
+        EditText MostrarMail = (EditText) findViewById(R.id.MostrarMail);
+
+        EditText MostrarFechaCreacion = (EditText) findViewById(R.id.MostrarFecha);
+        EditText BuscarID = (EditText) findViewById(R.id.MostrarNombre);
         Button Buscar = (Button) findViewById(R.id.Busco);
         Button Regresar = (Button) findViewById(R.id.Regresar);
 
@@ -65,7 +70,7 @@ public class Buscar extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(tag,"ERROR: " + error.toString());
+                Log.e(TAG,"ERROR: " + error.toString());
             }
         })
         {
@@ -77,7 +82,13 @@ public class Buscar extends AppCompatActivity {
                 return params;
             }
             @Override
-            public Map<>
-        }
+            public Map<String,String> getHeaders() throws AuthFailureError{
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("Content-Type","application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+
+        mRequestQueue.add(mStringRequest);
     }
 }
