@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -25,7 +26,7 @@ public class Buscar extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
-    private String url = "http://192.168.137.1/androidusers/buscar.php";
+    private String url = "http://192.168.137.1/Android_User/PHP/buscar.php?id=9"; //192.168.137.1
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +41,17 @@ public class Buscar extends AppCompatActivity {
 
         EditText MostrarFechaCreacion = (EditText) findViewById(R.id.MostrarFecha);
         EditText BuscarID = (EditText) findViewById(R.id.MostrarNombre);
-        Button Buscar = (Button) findViewById(R.id.Busco);
+        Button BuscarButon = (Button) findViewById(R.id.Busco);
         Button Regresar = (Button) findViewById(R.id.Regresar);
 
-            Buscar.setOnClickListener(new View.OnClickListener() {
+        BuscarButon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     sendAndRequestResponse();
                 }
             });
+
+        //api collection github
 
         Regresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,24 +63,26 @@ public class Buscar extends AppCompatActivity {
     }
     private void sendAndRequestResponse(){
         mRequestQueue = Volley.newRequestQueue(this);
-
+        Toast.makeText(getApplicationContext(), "manda",Toast.LENGTH_LONG).show();
         mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), "Entre al onResponse",Toast.LENGTH_LONG).show();
                 Log.e("HttpClient", "succes!response: " + response.toString());
+                Toast.makeText(getApplicationContext(), "Response: " + response.toString(),Toast.LENGTH_LONG).show();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG,"ERROR: " + error.toString());
+                Log.e("ERRORASO","ERROR: " + error.toString());
             }
         })
         {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String,String>();
-                params.put ("id","25");
+                params.put ("id","9");
 
                 return params;
             }

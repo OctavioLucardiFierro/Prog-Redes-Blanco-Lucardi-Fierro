@@ -1,0 +1,43 @@
+.container1{
+    padding: 10px;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button:hover{
+    background-color: #a22;
+}
+body{
+    width:100%;
+    height: 100%;
+    background-image: url(Fondito.jpg);
+    background-repeat: repeat;
+    background-size: 100%;
+    background-position: top;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+label {
+    width: 300px;
+    display: inline-block;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: 'Lato';
+}
+
+button {
+    width: 200px;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-family: 'Lato';
+    font-weight: 100;
+    background: rgb(50, 187, 205);
+    color: white;
+    border: none;
+}

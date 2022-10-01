@@ -4,7 +4,7 @@
 </head>
 <body>
     <?php
-            $inc2 = include("../db.php");
+            $inc2 = include("db.php");
 
             if ($inc2) {
                 $consulta2 = "SELECT * FROM `user`";
