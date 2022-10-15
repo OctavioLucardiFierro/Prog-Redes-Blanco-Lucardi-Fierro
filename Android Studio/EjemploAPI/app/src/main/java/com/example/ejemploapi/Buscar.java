@@ -19,6 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +28,7 @@ public class Buscar extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
-    private String url = "http://192.168.137.1/Android_User/PHP/buscar.php?id=9"; //192.168.137.1
+    private String url = "https://javierblanco.com.ar/androidusers/buscar.php"; //192.168.137.1
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +39,11 @@ public class Buscar extends AppCompatActivity {
 
         EditText MostrarNombre = (EditText) findViewById(R.id.MostrarNombre);
 
-        EditText MostrarMail = (EditText) findViewById(R.id.MostrarMail);
+        EditText id_inser = (EditText) findViewById(R.id.iNSERTid);
 
+        EditText MostrarMail = (EditText) findViewById(R.id.MostrarMail);
         EditText MostrarFechaCreacion = (EditText) findViewById(R.id.MostrarFecha);
-        EditText BuscarID = (EditText) findViewById(R.id.MostrarNombre);
+        EditText Mostrarnombre = (EditText) findViewById(R.id.MostrarNombre);
         Button BuscarButon = (Button) findViewById(R.id.Busco);
         Button Regresar = (Button) findViewById(R.id.Regresar);
 
@@ -64,10 +67,10 @@ public class Buscar extends AppCompatActivity {
     private void sendAndRequestResponse(){
         mRequestQueue = Volley.newRequestQueue(this);
         Toast.makeText(getApplicationContext(), "manda",Toast.LENGTH_LONG).show();
-        mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        mStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Entre al onResponse",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Entre al onResponse",Toast.LENGTH_LONG).show();
                 Log.e("HttpClient", "succes!response: " + response.toString());
                 Toast.makeText(getApplicationContext(), "Response: " + response.toString(),Toast.LENGTH_LONG).show();
 
@@ -82,9 +85,10 @@ public class Buscar extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String,String>();
-                params.put ("id","9");
-
+                EditText id_inser = (EditText) findViewById(R.id.iNSERTid);
+                params.put ("id", id_inser.getText().toString());
                 return params;
+
             }
             @Override
             public Map<String,String> getHeaders() throws AuthFailureError{

@@ -2,14 +2,10 @@ package com.example.ejemploapi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,10 +16,20 @@ public class MainActivity extends AppCompatActivity {
 
         Intent tercero = new Intent(this, Buscar.class);
         Intent segundo = new Intent(this, Crear.class);
+        Intent muestreme = new Intent (this, Mostrar.class);
 
+
+        Button Mostrar = (Button) findViewById(R.id.Mostrar);
         Button Buscar = (Button) findViewById(R.id.buttonbuscar);
         Button BuscarCrear = (Button) findViewById(R.id.buttoncrear);
 
+
+        Mostrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(muestreme);
+            }
+        });
 
         Buscar.setOnClickListener(new View.OnClickListener() {
             @Override
